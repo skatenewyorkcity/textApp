@@ -1,2 +1,2 @@
 # textApp
-Text application in Java
+Text application in Java.
