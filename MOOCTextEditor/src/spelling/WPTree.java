@@ -8,6 +8,11 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
+//**
+import java.util.Queue;
+import java.util.Set;
+//**
+
 /**
  * WPTree implements WordPath by dynamically creating a tree of words during a Breadth First
  * Search of Nearby words to create a path between two words. 
@@ -17,6 +22,12 @@ import java.util.List;
  */
 public class WPTree implements WordPath {
 
+	//**
+	
+		private static final int MAX_FIND_PATH_ITERATION = 100000;
+	
+	//**
+	
 	// this is the root node of the WPTree
 	private WPTreeNode root;
 	// used to search for nearby Words
@@ -30,11 +41,19 @@ public class WPTree implements WordPath {
 		// Dictionary d = new DictionaryHashSet();
 		// DictionaryLoader.loadDictionary(d, "data/dict.txt");
 		// this.nw = new NearbyWords(d);
+		
+		//**
+		
+			Dictionary d = new DictionaryHashSet();
+			DictionaryLoader.loadDictionary(d, "data/dict.txt");
+			this.nw = new NearbyWords(d);	
+		
+		//**
 	}
 	
 	//This constructor will be used by the grader code
 	public WPTree (NearbyWords nw) {
-		this.root = null;
+		//this.root = null;  //commented out, originally uncommented
 		this.nw = nw;
 	}
 	
@@ -42,7 +61,36 @@ public class WPTree implements WordPath {
 	public List<String> findPath(String word1, String word2) 
 	{
 	    // TODO: Implement this method.
-	    return new LinkedList<String>();
+		
+		
+	//**
+		
+		int iterCounter = MAX_FIND_PATH_ITERATION;
+		Queue<WPTreeNode> words = new LinkedList<>();
+		Set<String> visited = new HashSet<>();
+
+		root = new WPTreeNode(word1, null);
+		words.add(root);
+		visited.add(word1);
+
+		while (!words.isEmpty() && iterCounter > 0) {
+			WPTreeNode currentNode = words.remove();
+			for (String childWord : nw.distanceOne(currentNode.getWord(), true)) {
+				WPTreeNode childNode = new WPTreeNode(childWord, currentNode);
+				words.add(childNode);
+				visited.add(childWord);
+				if (childWord.equals(word2))
+					return childNode.buildPathToRoot();
+			}
+
+			iterCounter--;
+		}
+
+		return null;	
+		
+	//**
+		
+	    //return new LinkedList<String>(); //commented out as well
 	}
 	
 	// Method to print a list of WPTreeNodes (useful for debugging)
