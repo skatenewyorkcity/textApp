@@ -6,3 +6,5 @@ Text application in Java.
 ### Prerequisites
 
 ### Installing
+
+### Running the tests
