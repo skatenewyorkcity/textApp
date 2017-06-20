@@ -11,11 +11,12 @@ Eclipse IDE
 ```
 
 ### Installing
+ 
 
 ### Running the tests
 
 ### Built With
-Eclipse IDE - using Java with Processing library
+[Eclipse IDE](http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/keplersr1) - using Java with Processing library
 
 ### Authors
 Pedro Garboza
