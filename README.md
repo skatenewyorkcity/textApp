@@ -11,7 +11,6 @@ Eclipse IDE
 ```
 
 ### Installing
- 
 
 ### Running the tests
 
